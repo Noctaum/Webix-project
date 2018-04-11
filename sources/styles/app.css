@@ -23,3 +23,18 @@
 	float: left;
 	margin-right: 10px;
 }
+
+.bigCantainer{
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.conteiner{
+	min-width: 180px;
+}
+
+.content {
+	height: 30px;
+}
