@@ -13,11 +13,6 @@ export default class templateUser extends JetView{
 			label:_("Edit"), 
 			type:"iconButton",
 			icon:"edit",
-			//value:"Popup",
-			click: () => {
-				let values = this.$$("formUser").getValues();
-				contacts.updateItem(values.id, values);
-			}
 		};
 
 		let delBut = { 
@@ -27,11 +22,8 @@ export default class templateUser extends JetView{
 			gravity:1,
 			icon:"trash",
 			click: () => {
-				let form = this.$$("formUser");
-				let id = form.getValues().id;
+				let id = this.getParam("id");
 				if(id) contacts.remove(id);
-				form.clear();
-				form.clearValidation();
 			}
 		};
 
@@ -97,13 +89,13 @@ export default class templateUser extends JetView{
 				]
 			}; 
 
-		//<span class='webix_icon fa-#icon#'></span>
-
 		return {cols:[form, {rows:[saveBut,delBut,{}]}],gravity:4};
 	}
-	init(){
-		this.on(this.app, "onDataEditStop", (data) => {
-			if(data){
+	urlChange(){
+		contacts.waitData.then(() => {
+			const id = this.getParam("id");
+			if (id){
+				let data = contacts.getItem(id);
 				this.$$("head").setValues(data);
 				this.$$("mail").setValues(data);
 				this.$$("skype").setValues(data);

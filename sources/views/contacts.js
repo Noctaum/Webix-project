@@ -24,17 +24,15 @@ export default class DataView extends JetView{
 							view:"list",
 							gravity: 2,
 							id:"contsctsList",
-							autoConfig:true,
 							select:true,
-							template:"<div class='userImageWrapeSmall'><img class='userPhoto' src='http://milkyway.mie.uc.edu/cgdm/students/Male.png'></div><div>#FirstName# #LastName# <br> #Email#</div>",
+							template:"<div class='userImageWrapeSmall'><img class='userPhoto' src='http://milkyway.mie.uc.edu/cgdm/students/Male.png'></div>#FirstName# #LastName# <br> #Email#</div>",
 							type:{
 								height:70          
 							},
 							on:{
 								onAfterSelect:(id) =>{
 									this.setParam("id", id, true);
-									let values = this.$$("contsctsList").getSelectedItem();
-									this.app.callEvent("onDataEditStop", [values]);
+									this.show(`../contacts?id=${id}`);
 								}	
 							}
 						},
@@ -51,7 +49,7 @@ export default class DataView extends JetView{
 	}
 	urlChange(){
 		contacts.waitData.then(() => {
-			var id = this.getParam("id");
+			const id = this.getParam("id");
 			if (id) this.$$("contsctsList").select(id);
 			else this.$$("contsctsList").select(1);
 		});

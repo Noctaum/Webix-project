@@ -3,7 +3,6 @@ import {JetView} from "webix-jet";
 export default class DataView extends JetView{
 	config(){
 
-		//const _ = this.app.getService("locale")._;
 		const lang = this.app.getService("locale").getLang();
 		
 		let segment =	{ 

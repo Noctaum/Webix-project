@@ -17,13 +17,13 @@ export default class TopView extends JetView{
 			template:"<span class='webix_icon fa-#icon#'></span> #value# ",
 			data:[
 				{ value:_("Contacts"), id:"contacts", icon:"users" },
-				{ value:_("Activities"),id:"data",     icon:"calendar" },
+				{ value:_("Activities"),id:"activitiTable", icon:"calendar" },
 				{ value:_("Settings"),  id:"setting",  icon:"cogs" }
 			],
 			on: {
-			    onSelectChange:() => {
-			    	let mainText =  this.$$("top:menu").getSelectedItem();
-			    	this.$$("headVal").setValues(mainText);
+				onSelectChange:() => {
+					let mainText =  this.$$("top:menu").getSelectedItem();
+					this.$$("headVal").setValues(mainText);
 				}
 			}
 		};

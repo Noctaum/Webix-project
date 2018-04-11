@@ -13,7 +13,6 @@ export default class ContactForm extends JetView{
 			label:_("Edit"), 
 			type:"iconButton",
 			icon:"edit",
-			//value:"Popup",
 			click: () => {
 				let values = this.$$("form").getValues();
 				contacts.updateItem(values.id, values);

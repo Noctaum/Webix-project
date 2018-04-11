@@ -29,18 +29,13 @@ export default class WindowEdit extends JetView{
 								click: () => { 
 									let values = this.$$("form").getValues();
 									values.Details=values.Details.replace(/<.*?>/g, "");
-									//if(!values.validate())return false;
-									if(!values.Contact || !values.Type) {
-										webix.alert("Please, fill in the form");
-										return false;
-									}
+									if(!this.$$("form").validate())return false;
 									if(values.id){
 										activities.updateItem(values.id, values);
-										this.$$("popup").hide();
 									} else{
 										activities.add(values);
-										this.$$("popup").hide();
 									}
+									this.$$("popup").hide();
 								}
 							},
 							{view:"button", label:"Cancel", click:() => this.$$("popup").hide()},
@@ -48,12 +43,10 @@ export default class WindowEdit extends JetView{
 					}
 				]
 			}],
-			// rules:{
-
-			//  	Type:webix.rules.isNotEmpty,
-			//  	Contact:webix.rules.isNotEmpty,
-			//  	"Type":()=>{ if(!this.$$("form").getValues().TypeID) return false;}
-			// },
+			rules:{
+				Type:webix.rules.isNotEmpty,
+				Contact:webix.rules.isNotEmpty,
+			},
 		};
 
 		let pop = {
@@ -63,64 +56,6 @@ export default class WindowEdit extends JetView{
 			head:{template:"Add (*edit) activity"}, 
 			width: 700,
 			body: form
-			// body:{
-			// 	rows:[
-			// 		{ 
-			// 		    view: "textarea", 
-			// 		    label: "Details", 
-			// 		    labelAlign: "right", 
-			// 		    height: 200, 
-			// 		    //value: "type here" 
-			// 		},
-			// 		{ 
-			// 		    view:"combo", 
-			// 		    label:"Type", 
-			// 		    options:{data:status}
-			// 		},
-			// 		{ 
-			// 		    view:"combo", 
-			// 		    label:"Contact", 
-			// 		    options:{data:contacts}
-			// 		},
-			// 		{
-			// 			cols:[
-			// 				{ 
-			// 				    view:"datepicker", 
-			// 				    label:"Date", 
-			// 					name:"StartDate"
-			// 					//id or name??
-			// 				},
-			// 				{ 
-			// 				    view:"datepicker", 
-			// 				    label:"Time", 
-			// 				    type:"time"
-			// 				    //value:"One", 
-			// 				    //options:["One", "Two", "Three"]
-			// 				},
-
-			// 			]
-			// 		},
-			// 		{ 
-			// 			view:"checkbox", 
-			// 			label:"Completed", 
-			// 			//value:1
-			// 		},
-			// 		{
-			// 			cols:[
-			// 				{ 
-			// 					view:"button",
-			// 					label:"Add (*save)", 
-			// 				},
-			// 				{ 
-			// 					view:"button",
-			// 					label:"Cancel",
-			// 					click:() => this.$$("popup").hide() 
-			// 				},
-			// 			]
-			// 		}
-
-			// 	]
-			// }
 		};
 		return pop;
 	}
