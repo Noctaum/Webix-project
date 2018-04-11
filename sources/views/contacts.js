@@ -26,7 +26,7 @@ export default class DataView extends JetView{
 							id:"contsctsList",
 							autoConfig:true,
 							select:true,
-							template:"<div>#FirstName# #LastName#</div>#Email#",
+							template:"<div class='userImageWrapeSmall'><img class='userPhoto' src='http://milkyway.mie.uc.edu/cgdm/students/Male.png'></div><div>#FirstName# #LastName# <br> #Email#</div>",
 							type:{
 								height:70          
 							},
