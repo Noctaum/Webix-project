@@ -12,8 +12,8 @@ export default class WindowEdit extends JetView{
 			elements:[{
 				rows:[
 					{view: "textarea", label: "Details", height: 200, name:"Details"},
-					{view:"combo", label:"TypeID", options:{data:status, body:{template:"#Value#"}}, name:"Type", invalidMessage:"Title shouldn't be empty!"},
-					{view:"combo", label:"ContactID", options:{data:contacts, body:{template:"#FirstName#"}}, name:"Contact", invalidMessage:"Title shouldn't be empty!"},
+					{view:"combo", label:"TypeID", options:{data:status}, name:"Type", invalidMessage:"Title shouldn't be empty!"},
+					{view:"combo", label:"ContactID", options:{data:contacts}, name:"Contact", invalidMessage:"Title shouldn't be empty!"},
 					{
 						cols:[
 							{view:"datepicker", label:"Date", name:"DueDate"},

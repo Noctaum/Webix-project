@@ -49,11 +49,11 @@ export default class DataView extends JetView{
 				{id:"TypeID", header: ["Activity type" ,{content:"selectFilter"}], sort:"string", options:typeActivity},
 				{id:"DueDate", header:["Due date",{ content:"datepickerFilter"}], sort:"date"},
 				{id:"Details", header:["Details", { content:"textFilter"}], sort:"string"},
-				{id:"ContactID", header:["Contact",{ content:"selectFilter"}], sort:"string", options:{data:contacts, body:{template:"#FirstName#"}}},
+				{id:"ContactID", header:["Contact",{ content:"selectFilter"}], sort:"string", options:contacts},
 				{id:"edit", header:["",""], template:"{common.editIcon()}"},
 				{id:"trash", header:["",""], template:"{common.trashIcon()}"}
 			],
-
+			
 			//Delete selected activity
 			onClick:{
 				"fa-trash":function(e,id){
