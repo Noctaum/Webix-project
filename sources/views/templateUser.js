@@ -19,7 +19,6 @@ export default class templateUser extends JetView{
 			view:"button",
 			label:_("Delete"), 
 			type:"iconButton",
-			gravity:1,
 			icon:"trash",
 			click: () => {
 				let id = this.getParam("id");
@@ -64,7 +63,13 @@ export default class templateUser extends JetView{
 				gravity: 3
 			};
 			
-		return {cols:[form, {rows:[{cols:[delBut, saveBut]},{}]}],gravity:4};
+		return {cols:[
+			form, 
+			{rows:[
+				{cols:[delBut, saveBut]},
+				{}
+			]}
+		],gravity:4};
 	}
 	urlChange(){
 		webix.promise.all([

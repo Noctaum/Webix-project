@@ -39,7 +39,6 @@ export default class DataView extends JetView{
 							},
 							on:{
 								onAfterSelect:(id) =>{
-									this.setParam("id", id, true);
 									this.show(`../contacts?id=${id}`);
 								}	
 							}
@@ -61,7 +60,7 @@ export default class DataView extends JetView{
 		contacts.waitData.then(() => {
 			const id = this.getParam("id");
 			if (id) this.$$("contsctsList").select(id);
-			else this.$$("contsctsList").select(2);
+			else this.$$("contsctsList").select(contacts.getFirstId());
 		});
 	} 
 }

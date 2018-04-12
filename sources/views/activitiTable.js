@@ -28,7 +28,6 @@ export default class DataView extends JetView{
 		//Add Button, add new activity
 		let addBut = { 
 			view:"button",
-			gravity:1,
 			type:"iconButton",
 			icon:"plus",
 			label:_("Add activity"), 
@@ -45,13 +44,13 @@ export default class DataView extends JetView{
 			datatype:"json",
 			select:true,
 			columns:[
-				{id:"State", header:["",""], sort:"string", template:"{common.checkbox()}", uncheckValue:"Open", checkValue:"Close"},
-				{id:"TypeID", header: ["Activity type" ,{content:"selectFilter"}], sort:"string", options:typeActivity},
-				{id:"DueDate", header:["Due date",{ content:"datepickerFilter"}], sort:"date"},
-				{id:"Details", header:["Details", { content:"textFilter"}], sort:"string"},
-				{id:"ContactID", header:["Contact",{ content:"selectFilter"}], sort:"string", options:contacts},
-				{id:"edit", header:["",""], template:"{common.editIcon()}"},
-				{id:"trash", header:["",""], template:"{common.trashIcon()}"}
+				{id:"State", header:["",""], sort:"string", template:"{common.checkbox()}", uncheckValue:"Open", checkValue:"Close",width:40},
+				{id:"TypeID", header: ["Activity type" ,{content:"selectFilter"}], sort:"string", options:typeActivity,fillspace:4},
+				{id:"DueDate", header:["Due date",{ content:"datepickerFilter"}], sort:"date",fillspace:2},
+				{id:"Details", header:["Details", { content:"textFilter"}], sort:"string",fillspace:2},
+				{id:"ContactID", header:["Contact",{ content:"selectFilter"}], sort:"string", options:contacts, fillspace:2},
+				{id:"edit", header:["",""], template:"{common.editIcon()}",width:40},
+				{id:"trash", header:["",""], template:"{common.trashIcon()}",width:40}
 			],
 			
 			//Delete selected activity
