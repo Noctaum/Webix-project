@@ -1,6 +1,6 @@
 import {JetView} from "webix-jet";
 import {contacts} from "models/contacts";
-import {status} from "models/status";
+import {typeActivity} from "models/typeActivity";
 import {activities} from "models/activities";
 
 export default class WindowEdit extends JetView{
@@ -12,7 +12,7 @@ export default class WindowEdit extends JetView{
 			elements:[{
 				rows:[
 					{view: "textarea", label: "Details", height: 200, name:"Details"},
-					{view:"combo", label:"TypeID", options:{data:status}, name:"Type", invalidMessage:"Title shouldn't be empty!"},
+					{view:"combo", label:"TypeID", options:{data:typeActivity}, name:"Type", invalidMessage:"Title shouldn't be empty!"},
 					{view:"combo", label:"ContactID", options:{data:contacts}, name:"Contact", invalidMessage:"Title shouldn't be empty!"},
 					{
 						cols:[
@@ -20,7 +20,7 @@ export default class WindowEdit extends JetView{
 							{view:"datepicker", label:"Time", type:"time", name:"Time"},
 						]
 					},
-					{view:"checkbox", label:"Completed"},
+					{view:"checkbox", label:"Completed", name:"State", uncheckValue:"Open", checkValue:"Close"},
 					{
 						cols:[
 							{
