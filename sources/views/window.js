@@ -8,7 +8,6 @@ export default class WindowEdit extends JetView{
 
 		let form = {
 			view:"form",
-			id:"form",
 			elements:[{
 				rows:[
 					{view: "textarea", label: "Details", height: 200, name:"Details"},
@@ -23,12 +22,12 @@ export default class WindowEdit extends JetView{
 					{view:"checkbox", label:"Completed", name:"State", uncheckValue:"Open", checkValue:"Close"},
 					{
 						cols:[
+							{},
 							{
 								view:"button",
-								id:"but", 
-								label: labelForBut,
+								label: "",
 								click: () => { 
-									let popForm = this.$$("form");
+									let popForm = this.getRoot().queryView({view:"form"});
 									let values = popForm.getValues();
 									values.Details=values.Details.replace(/<.*?>/g, "");
 									if(!popForm.validate()) return false;
@@ -37,14 +36,14 @@ export default class WindowEdit extends JetView{
 									} else{
 										activities.add(values);
 									}
-									hideFunction();
+									this.hideFunction();
 								}
 							},
 							{
 								view:"button", 
 								label:"Cancel", 
 								click:() => {
-									hideFunction();
+									this.hideFunction();
 								}
 							},
 						]
@@ -57,48 +56,37 @@ export default class WindowEdit extends JetView{
 			},
 		};
 
-		let hideFunction = () =>{
-			let popForm = this.$$("form");
-			popForm.clear();
-			popForm.clearValidation();
-			this.$$("popup").hide();
-		};
-
-		let labelForBut = (obj)=>obj;
-
-		let templateForPopHead = {
-			id:"excess",
-			template: (obj)=>{
-				return `${obj.id ? "Edit" : "Add"} activities`;}
-		};
-
 		let pop = {
 			view:"window",
-			id:"popup",
 			position:"center",
-			head:templateForPopHead, 
+			head:(obj)=>`${obj} activities`, 
 			width: 700,
 			body: form
 		};
-		
+
 		return pop;
 	}
 	init(){
 		this.on(this.app, "dataActivityEdit", (data) => {
-			this.$$("form").setValues(data);
-			this.$$("excess").setValues(data);
+			if(data.disabled) this.getRoot().queryView({name:"ContactID"}).disable();
+			this.getRoot().queryView({view:"form"}).setValues(data);
 			let a;
 			data.id ? a = "Edit" : a = "Add";
-			this.$$("but").setValue(a);
-
+			this.getRoot().getHead().setValues(a);
+			this.getRoot().queryView({view:"button"}).setValue(a);
 		});
 	}
 	showWindow() {
 		this.getRoot().show();
 	}
+	hideFunction(){
+		let popForm = this.getRoot().queryView({view:"form"});
+		popForm.clear();
+		popForm.clearValidation();
+		this.getRoot().hide();
+
+		//for reboot "individualActivitiTable"
+		this.app.callEvent("newer", [{}]);
+	}
 }
-
-
-		
-
 

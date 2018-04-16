@@ -90,7 +90,9 @@ export default class DataView extends JetView{
 	
 	init(){
 		this._jetPopup = this.ui(WindowEdit);
-		this.$$("activityData").sync(activities);
+		activities.waitData.then(() => {
+			this.$$("activityData").sync(activities);
+		});
 	}
 }
 
