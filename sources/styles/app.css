@@ -1,0 +1,40 @@
+.webix_view{
+	border: none;
+}
+
+.border{
+	border: 1px solid gray;
+	margin: 1px;
+}
+
+.userImageWrape{
+	height: 180px;
+	width: 180px;
+}
+
+.userPhoto{
+	height: 100%;
+	width: 100%;
+}
+
+.userImageWrapeSmall{
+	height: 50px;
+	width: 50px;
+	float: left;
+	margin-right: 10px;
+}
+
+.bigCantainer{
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.conteiner{
+	min-width: 180px;
+}
+
+.content {
+	height: 30px;
+}
