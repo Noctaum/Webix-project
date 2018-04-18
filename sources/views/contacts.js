@@ -59,7 +59,7 @@ export default class DataView extends JetView{
 	urlChange(){
 		contacts.waitData.then(() => {
 			const id = this.getParam("id");
-			if (id && contacts.getIndexById(id) !== -1) this.$$("contsctsList").select(id);
+			if (id && contacts.exists(id)) this.$$("contsctsList").select(id);
 			else this.$$("contsctsList").select(contacts.getFirstId());
 		});
 	} 
