@@ -19,13 +19,14 @@ export default class WindowEdit extends JetView{
 							{view:"datepicker", label:"Time", type:"time", name:"Time"},
 						]
 					},
-					{view:"checkbox", label:"Completed", name:"State", uncheckValue:"Open", checkValue:"Close"},
+					{view:"checkbox", label:"Completed", name:"State", uncheckValue:"Open", checkValue:"Close", labelWidth:92},
 					{
 						cols:[
 							{},
 							{
 								view:"button",
 								label: "",
+								type:"form",
 								click: () => { 
 									let popForm = this.getRoot().queryView({view:"form"});
 									let values = popForm.getValues();
@@ -73,7 +74,7 @@ export default class WindowEdit extends JetView{
 			let a;
 			data.id ? a = "Edit" : a = "Add";
 			this.getRoot().getHead().setValues(a);
-			this.getRoot().queryView({view:"button"}).setValue(a);
+			this.getRoot().queryView({view:"button", type:"form"}).setValue(a);
 		});
 	}
 	showWindow() {
