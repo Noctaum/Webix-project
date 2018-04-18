@@ -84,9 +84,6 @@ export default class WindowEdit extends JetView{
 		popForm.clear();
 		popForm.clearValidation();
 		this.getRoot().hide();
-
-		//for reboot "individualActivitiTable"
-		this.app.callEvent("newer", [{}]);
 	}
 }
 

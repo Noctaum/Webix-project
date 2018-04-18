@@ -46,7 +46,7 @@ export default class aUserDataView extends JetView{
 							if(result){
 								activities.remove(id);
 								activities.waitData.then(
-									()=> {webix.message("Deleted");this.urlChange();},
+									()=> webix.message("Deleted"),
 									()=> webix.message("Undeleted")
 								);
 							}
@@ -62,6 +62,14 @@ export default class aUserDataView extends JetView{
 					this._jetPopup.showWindow(); 
 				}
 			},
+			on:{
+				onAfterFilter:()=>{
+					let id = this.getParam("id",true);
+					this.$$("aUserActivTable").filter((data)=>{
+						return data.ContactID == id;
+					},"",true);
+				}
+			}
 		};
 
 		return {id:"activ", rows:[datatable,{cols:[{},addBut]}]};
@@ -69,39 +77,15 @@ export default class aUserDataView extends JetView{
 	}
 	init(){
 		this._jetPopup = this.ui(WindowEdit);
-
-		this.on(this.app, "newer", () => {
-			this.urlChange();
-		});
 	}
 	urlChange(){
-		//(below) Wokr better, but it have problem with table filter
-
-		// activities.waitData.then(() => {
-		// 	let id = this.getParam("id",true);
-		// 	this.$$("aUserActivTable").sync(activities, function(){
-		// 		this.filter(function(data){
-		// 			return data.ContactID == id;
-		// 		});
-		// 	});
-		// });
-		
 		activities.waitData.then(() => {
 			let id = this.getParam("id",true);
-			this.$$("aUserActivTable").sync(activities);
-			let mass = [];
-			this.$$("aUserActivTable").data.each((a)=>{
-				if (a.ContactID == id) mass.push(a);
+			this.$$("aUserActivTable").sync(activities, function(){
+				this.filter(function(data){
+					return data.ContactID == id;
+				});
 			});
-			this.$$("aUserActivTable").clearAll();
-			this.$$("aUserActivTable").parse(mass);
 		});
 	}
 }
-
-
-
-
-
-					
-

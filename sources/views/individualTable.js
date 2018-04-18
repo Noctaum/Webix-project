@@ -11,7 +11,7 @@ export default class aUserDataView extends JetView{
 			{
 				view: "tabbar", 
 				id: "activBar", 
-				value:_("listView"), 
+				value:_("activ"), 
 				multiview: true, 
 				options: [
 					{ value: "Activities", id: "activ"},
