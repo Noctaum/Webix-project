@@ -18,7 +18,7 @@ export default class DataView extends JetView{
 		let templ=(data)=>{
 			return `
 				<div class='userImageWrapeSmall'>
-					<img class='userPhoto' src=${data.Photo ? data.Photo : "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
+					<img class='userPhoto' src=${data.Photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 				</div>
 				${data.FirstName || "nameless"}
 				${data.LastName || "empty"} <br>

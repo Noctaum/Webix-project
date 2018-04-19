@@ -33,7 +33,7 @@ export default class aUserDataView extends JetView{
 				{id:"DueDate", header:{content:"datepickerFilter"}, sort:"date",fillspace:2},
 				{id:"Details", header:{content:"textFilter"}, sort:"string",fillspace:2},
 				{id:"edit", header:"", template:"{common.editIcon()}",width:40},
-				{id:"trash", header:"", template:"{common.trashIcon()}",width:40}
+				{id:"trash", header:"", template:"{common.trashIcon()}",width:40},
 			],
 			
 			//Delete selected activity
@@ -86,6 +86,7 @@ export default class aUserDataView extends JetView{
 					return data.ContactID == id;
 				});
 			});
+		this.$$("aUserActivTable").filterByAll();
 		});
 	}
 }

@@ -22,7 +22,7 @@ export default class ContactForm extends JetView{
 				} else{
 					contacts.add(values);
 				}
-				this.app.show("top/contacts");
+				this.app.show(`top/contacts?id=${values.id}/templateUser`);
 			}
 		};
 
@@ -84,7 +84,12 @@ export default class ContactForm extends JetView{
 							{
 								view:"button", 
 								label:"Delete photo", 
-								click:()=>{this.$$("form").setValues({Photo:"http://milkyway.mie.uc.edu/cgdm/students/Male.png"}, true);this.photo();}
+								click:()=>{
+									this.$$("form").setValues({
+										Photo:"http://milkyway.mie.uc.edu/cgdm/students/Male.png"
+									}, true);
+									this.photo();
+								}
 							}
 						]}
 						
