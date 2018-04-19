@@ -6,7 +6,7 @@ webix.ready(() => {
 		id:			APPNAME,
 		version:	VERSION,
 		//router:        UrlRouter,
-		start:		"/top/contacts/",
+		start:		"/top/contacts?id=Start",
 		debug:      true
 	});
 	app.render();
