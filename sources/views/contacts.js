@@ -64,3 +64,4 @@ export default class DataView extends JetView{
 		});
 	} 
 }
+
