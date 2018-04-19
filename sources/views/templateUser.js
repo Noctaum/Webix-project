@@ -49,27 +49,27 @@ export default class templateUser extends JetView{
 			let Status = status.getItem(data.StatusID);
 			return `
 				<div>
-					<h2>${data.FirstName ? data.FirstName : "empty"} ${data.LastName ? data.LastName : "empty"}</h2>
+					<h2>${data.FirstName || "empty"} ${data.LastName || "empty"}</h2>
 				</div>
 				<div class="bigCantainer">
 					<div class="conteiner">
 						<div class='userImageWrape'>
-							<img class='userPhoto' src=${data.Photo ? data.Photo : "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
+							<img class='userPhoto' src=${data.Photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 						</div>
 						<div class="content">${Status && Status.Value ? Status.Value : "empty"} </div>
 					</div>
 					<div class="conteiner">
 						<div class="content">
-							<span class='webix_icon fa-envelope'></span> ${data.Email ? data.Email : "empty"}
+							<span class='webix_icon fa-envelope'></span> ${data.Email || "empty"}
 						</div>
-						<div class="content"><span class='webix_icon fa-skype'></span> ${data.Skype ? data.Skype : "empty"} </div>
-						<div class="content"><span class='webix_icon fa-tag'></span> ${data.Job ? data.Job : "empty"}</div>
-						<div class="content"><span class='webix_icon fa-briefcase'></span> ${data.Company ? data.Company : "empty"} </div>
+						<div class="content"><span class='webix_icon fa-skype'></span> ${data.Skype || "empty"} </div>
+						<div class="content"><span class='webix_icon fa-tag'></span> ${data.Job || "empty"}</div>
+						<div class="content"><span class='webix_icon fa-briefcase'></span> ${data.Company || "empty"} </div>
 					</div>
 					<div class="conteiner">
 						<div class="content">
-						<span class='webix_icon fa-calendar'></span> ${data.Birthday ? data.Birthday : "empty"} </div>
-						<div class="content"><span class='webix_icon fa-map-marker'></span> ${data.Address ? data.Address : "empty"} </div>
+						<span class='webix_icon fa-calendar'></span> ${data.Birthday || "empty"} </div>
+						<div class="content"><span class='webix_icon fa-map-marker'></span> ${data.Address || "empty"} </div>
 					</div>
 				</div>`;
 		};
