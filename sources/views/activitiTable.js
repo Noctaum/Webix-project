@@ -22,7 +22,11 @@ export default class DataView extends JetView{
 				{ id:"week", value:"This week"},
 				{ id:"month", value:"This month"}
 			],
-		
+			on:{
+				onChange:()=>{
+					this.$$("activityData").filterByAll();
+				}
+			}
 		};
 
 		//Add Button, add new activity
@@ -92,6 +96,26 @@ export default class DataView extends JetView{
 		this._jetPopup = this.ui(WindowEdit);
 		activities.waitData.then(() => {
 			this.$$("activityData").sync(activities);
+
+			this.$$("activityData").registerFilter(this.$$("segmentBar"), 
+			{columnId:"DueDate", compare:function(value, filter, item){
+    		if(filter == "all")  return 1; 
+   			if(filter == "over")  return 0;
+   			if(filter == "complete")  return 0;
+   			if(filter == "today")  return 0;
+   			if(filter == "tommorow")  return 0;
+   			if(filter == "week")  return 0;
+   			if(filter == "month")  return 0;
+  		}},
+  		{ 
+		    getValue:function(node){
+		      return node.getValue();
+		    },
+		    setValue:function(node, value){
+		      node.setValue(value);
+		    }
+		  }
+		);
 		});
 	}
 }

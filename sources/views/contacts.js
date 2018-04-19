@@ -30,6 +30,25 @@ export default class DataView extends JetView{
 				{cols:[
 					{rows:[
 						{
+							view:"text", 
+							id:"filterForUser",
+							placeholder:"type to find matching contacts",
+							on:{
+								onTimedKeyPress:()=>{
+									let value = this.$$("filterForUser").getValue().toLowerCase();
+									this.$$("contactsList").filter(function(obj){
+
+										//It work bed because the most of time we find all contacts
+										// for(let key in obj){
+										// 	if (obj[key].toLowerCase().indexOf(value) == 0) return true;
+										// }
+
+										if (obj.FirstName.toLowerCase().indexOf(value) == 0 || obj.LastName.toLowerCase().indexOf(value) == 0 || obj.Email.toLowerCase().indexOf(value) == 0) return true;
+									});
+								}
+							}
+						},
+						{
 							css:"border",
 							view:"list",
 							id:"contactsList",
