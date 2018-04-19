@@ -13,6 +13,8 @@ export default class ContactForm extends JetView{
 			view:"button", 
 			id:"but",
 			label:"", 
+			type:"iconButton",
+			icon:"edit",
 			click: () => {
 				let values = this.$$("form").getValues();
 				if(values.id){
@@ -35,37 +37,33 @@ export default class ContactForm extends JetView{
 			}
 		};
 
-		
-		//
 		let form = {
 			view:"form",
 			id:"form",
 			css:"border",
 			elements:[
 				{cols:[
-					{view:"text", label:_("First Name"), name:"FirstName"},
-					{view:"text", label:_("Email"), name:"Email"},
+					{view:"text", label:_("First Name"), name:"FirstName", labelWidth:100},
+					{view:"text", label:_("Email"), name:"Email", labelWidth:100},
 				]},
 				{cols:[
-					{view:"text", label:_("Last Name"), name:"LastName"},
-					{view:"text", label:_("Skype"), name:"Skype"},
+					{view:"text", label:_("Last Name"), name:"LastName", labelWidth:100},
+					{view:"text", label:_("Skype"), name:"Skype", labelWidth:100},
 				]},
 				{cols:[
-					{view:"datepicker", label:_("Joining date"), name:"StartDate"},
-					{view:"text", label:_("Phone"), name:"Phone"},
-					
+					{view:"datepicker", label:_("Joining date"), name:"StartDate", labelWidth:100},
+					{view:"text", label:_("Phone"), name:"Phone", labelWidth:100},					
 				]},
 				{cols:[
-					
-					{view:"combo", label:_("Status"), name:"StatusID", options:{data:status}},
-					{view:"datepicker", label:_("Birthday"), name:"Birthday"},
+					{view:"combo", label:_("Status"), name:"StatusID", options:{data:status}, labelWidth:100},
+					{view:"datepicker", label:_("Birthday"), name:"Birthday", labelWidth:100},
 				]},
 				{cols:[
 					{rows:[
-						{view:"text", label:_("Job"), name:"Job"},
-						{view:"text", label:_("Company"), name:"Company"},
-						{view:"text", label:_("Website"), name:"Website"},
-						{view:"text", label:_("Address"), name:"Address"},
+						{view:"text", label:_("Job"), name:"Job", labelWidth:100},
+						{view:"text", label:_("Company"), name:"Company", labelWidth:100},
+						{view:"text", label:_("Website"), name:"Website", labelWidth:100},
+						{view:"text", label:_("Address"), name:"Address", labelWidth:100},
 					]},
 					{cols:[
 						{name:"Photo", template:(a)=>a, id:"imgUser"},
@@ -80,19 +78,14 @@ export default class ContactForm extends JetView{
 								accept:"image/jpeg, image/png",
 								name:"Photo",
 								on:{
-									onBeforeFileAdd:(upload)=>{    
-										var file = upload.file;
-										var reader = new FileReader();  
-										reader.onload = (event) => {
-											this.$$("form").setValues({Photo:event.target.result}, true);
-											this.photo();
-										};   
-										reader.readAsDataURL(file);
-										return false;
-									}
+									onBeforeFileAdd:(upload)=>{this.beforeAdd(upload);}
 								}
 							},
-							{view:"button", label:"Delete photo", click:()=>{this.$$("form").setValues({Photo:"http://milkyway.mie.uc.edu/cgdm/students/Male.png"}, true);this.photo();}}
+							{
+								view:"button", 
+								label:"Delete photo", 
+								click:()=>{this.$$("form").setValues({Photo:"http://milkyway.mie.uc.edu/cgdm/students/Male.png"}, true);this.photo();}
+							}
 						]}
 						
 					]},
@@ -124,7 +117,6 @@ export default class ContactForm extends JetView{
 			status.waitData
 		]).then(()=>{
 			const id = this.getParam("id",true);
-			let text = "<span class='webix_icon fa-edit'></span>";
 			let str, data, templStr;
 			if (id && id !== "new"){
 				str = "Save";
@@ -135,19 +127,29 @@ export default class ContactForm extends JetView{
 				data = {};
 			}
 			this.$$("form").setValues(data);
-			this.$$("but").setValue(text+str);
+			this.$$("but").config.label = str;
+			this.$$("but").refresh();
 			this.$$("headTempl").setValues(templStr);
 			
 			this.photo();
-		},()=>{webix.message("Ошибка загрузки данных!");});
+		});
 	}
 	photo(){
 		let photo = this.$$("form").getValues().Photo; 
 		this.$$("imgUser").setValues(`
 			<div class='userImageWrape'>
-				<img class='userPhoto' src=${photo ? photo : "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
+				<img class='userPhoto' src=${photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 			</div>
 		`);
 	}
+	beforeAdd(upload){    
+		var file = upload.file;
+		var reader = new FileReader();  
+		reader.onload = (event) => {
+			this.$$("form").setValues({Photo:event.target.result}, true);
+			this.photo();
+		};   
+		reader.readAsDataURL(file);
+		return false;
+	}
 }
-
