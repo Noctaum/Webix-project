@@ -1,6 +1,5 @@
 import {JetView} from "webix-jet";
 import {contacts} from "models/contacts";
-import templateUser from "views/templateUser";
 
 export default class DataView extends JetView{
 	config(){
@@ -11,16 +10,19 @@ export default class DataView extends JetView{
 			label:_("Add new"), 
 			type:"iconButton",
 			icon:"plus",
-			click: () => {}
+			click: () => {
+				this.show("../contacts?id=new/contactsForm");
+			}
 		};
 
 		let templ=(data)=>{
-			return `<div class='userImageWrapeSmall'>
-					<img class='userPhoto' src='http://milkyway.mie.uc.edu/cgdm/students/Male.png'>
+			return `
+				<div class='userImageWrapeSmall'>
+					<img class='userPhoto' src=${data.Photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 				</div>
-				${data.FirstName ? data.FirstName : "nameless"}
-				${data.LastName ? data.LastName : "empty"} <br>
-				${data.Email ? data.Email : "empty"}`;			
+				${data.FirstName || "nameless"}
+				${data.LastName || "empty"} <br>
+				${data.Email || "empty"}`;			
 		};
 
 		let list = { 
@@ -28,25 +30,24 @@ export default class DataView extends JetView{
 				{cols:[
 					{rows:[
 						{
+
 							css:"border",
 							view:"list",
-							gravity: 3,
-							id:"contsctsList",
+							id:"contactsList",
 							select:true,
 							template:templ,
 							type:{
 								height:70          
 							},
-							on:{
-								onAfterSelect:(id) =>{
-									this.show(`../contacts?id=${id}`);
-								}	
-							}
+							click:(id) =>{
+								this.show(`../contacts?id=${id}/templateUser`);
+							},
+							gravity:100,
 						},
-						{},
 						addBut,
-					]},
-					{$subview:templateUser}
+					],
+					},
+					{$subview:true}
 				]}
 			]	
 		};
@@ -54,13 +55,17 @@ export default class DataView extends JetView{
 	}
 
 	init(){
-		this.$$("contsctsList").sync(contacts);
+		this.$$("contactsList").sync(contacts);
 	}
 	urlChange(){
 		contacts.waitData.then(() => {
-			const id = this.getParam("id");
-			if (id && contacts.exists(id)) this.$$("contsctsList").select(id);
-			else this.$$("contsctsList").select(contacts.getFirstId());
+			const id = this.getParam("id",true);
+			if (id === undefined || !contacts.exists(id) && id !=="new") this.show(`../contacts?id=${contacts.getFirstId()}/templateUser`);
+			else if (id && id !=="new") {
+				this.$$("contactsList").select(id);
+				this.$$("contactsList").showItem(id);
+			}
 		});
 	} 
 }
+

@@ -60,15 +60,16 @@ export default class WindowEdit extends JetView{
 		let pop = {
 			view:"window",
 			position:"center",
-			head:(obj)=>`${obj} activities`,
+			head:(obj)=>`${obj} activities`, 
 			width: 700,
 			body: form
 		};
-		
+
 		return pop;
 	}
 	init(){
 		this.on(this.app, "dataActivityEdit", (data) => {
+			if(data.disabled) this.getRoot().queryView({name:"ContactID"}).disable();
 			this.getRoot().queryView({view:"form"}).setValues(data);
 			let a;
 			data.id ? a = "Edit" : a = "Add";
@@ -84,13 +85,6 @@ export default class WindowEdit extends JetView{
 		popForm.clear();
 		popForm.clearValidation();
 		this.getRoot().hide();
-
-		//for reboot "individualActivitiTable"
-		this.app.callEvent("newer", [{}]);
 	}
 }
-
-
-		
-
 
