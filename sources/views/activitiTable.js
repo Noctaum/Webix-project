@@ -104,7 +104,7 @@ export default class DataView extends JetView{
 					let parserDay = webix.Date.dateToStr("%j");
 					if(filter == "all") return 1; 
 					if(filter == "over") return value < new Date() && item.State == "Open";
-					if(filter == "complete") return item.State == "Open";
+					if(filter == "complete") return item.State == "Close";
 					if(filter == "today") return formatFull(value) == formatFull(new Date());
 					if(filter == "tommorow"){
 						if(formatHalf(value) == formatHalf(new Date()) && (+parserDay(value)) == (+(parserDay(new Date))+1)) return 1;

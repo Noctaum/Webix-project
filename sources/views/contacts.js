@@ -49,7 +49,6 @@ export default class DataView extends JetView{
 							}
 						},
 						{
-							css:"border",
 							view:"list",
 							id:"contactsList",
 							select:true,
