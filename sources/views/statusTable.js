@@ -8,7 +8,7 @@ export default class statusData extends data{
 		});
 	}
 	add(){
-		status.add({Value:"New Status", Icon:"Icon"})
+		status.add({Value:"New Status", Icon:"Icon"});
 	}
 	dell(){ 
 		var one = this.table.getSelectedId();

@@ -86,7 +86,7 @@ export default class aUserDataView extends JetView{
 					return data.ContactID == id;
 				});
 			});
-		this.$$("aUserActivTable").filterByAll();
+			this.$$("aUserActivTable").filterByAll();
 		});
 	}
 }

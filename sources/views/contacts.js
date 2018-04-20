@@ -28,7 +28,7 @@ export default class DataView extends JetView{
 		let list = { 
 			rows:[
 				{cols:[
-					{rows:[
+					{css:"border", rows:[
 						{
 							view:"text", 
 							id:"filterForUser",
@@ -49,10 +49,10 @@ export default class DataView extends JetView{
 							}
 						},
 						{
-							css:"border",
 							view:"list",
 							id:"contactsList",
 							select:true,
+							gravity:100,
 							template:templ,
 							type:{
 								height:70          
@@ -61,11 +61,10 @@ export default class DataView extends JetView{
 								this.show(`../contacts?id=${id}/templateUser`);
 							}
 						},
-						{},
 						addBut,
 					],
 					},
-					{$subview:true}
+					{$subview:true,}
 				]}
 			]	
 		};

@@ -8,7 +8,7 @@ export default class countryData extends data{
 		});
 	}
 	add(){
-		typeActivity.add({Value:"New Activity",Icon:"Icon"})
+		typeActivity.add({Value:"New Activity",Icon:"Icon"});
 	}
 	dell(){
 		var one = this.table.getSelectedId();

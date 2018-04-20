@@ -14,13 +14,13 @@ export default class DataView extends JetView{
 			id:"segmentBar",
 			gravity:5, 
 			options:[
-				{ id:"all", value:"All" },
-				{ id:"over", value:"Overdue" }, 
-				{ id:"complete", value:"Completed" },
-				{ id:"today", value:"Today" },
-				{ id:"tommorow", value:"Tomorrow" },
-				{ id:"week", value:"This week"},
-				{ id:"month", value:"This month"}
+				{ id:"all", value:_("All") },
+				{ id:"over", value:_("Overdue") }, 
+				{ id:"complete", value:_("Completed") },
+				{ id:"today", value:_("Today") },
+				{ id:"tommorow", value:_("Tomorrow") },
+				{ id:"week", value:_("This week")},
+				{ id:"month", value:_("This month")}
 			],
 			on:{
 				onChange:()=>{
@@ -49,10 +49,10 @@ export default class DataView extends JetView{
 			select:true,
 			columns:[
 				{id:"State", header:["",""], sort:"string", template:"{common.checkbox()}", uncheckValue:"Open", checkValue:"Close",width:40},
-				{id:"TypeID", header: ["Activity type" ,{content:"selectFilter"}], sort:"string", options:typeActivity,fillspace:4},
-				{id:"DueDate", header:["Due date",{ content:"datepickerFilter"}], sort:"date",fillspace:2},
-				{id:"Details", header:["Details", { content:"textFilter"}], sort:"string",fillspace:2},
-				{id:"ContactID", header:["Contact",{ content:"selectFilter"}], sort:"string", options:contacts, fillspace:2},
+				{id:"TypeID", header: [_("Activity type") ,{content:"selectFilter"}], sort:"string", options:typeActivity,fillspace:4},
+				{id:"DueDate", header:[_("Due date"),{ content:"datepickerFilter"}], sort:"date",fillspace:2},
+				{id:"Details", header:[_("Details"), { content:"textFilter"}], sort:"string",fillspace:2},
+				{id:"ContactID", header:[_("Contact"),{ content:"selectFilter"}], sort:"string", options:contacts, fillspace:2},
 				{id:"edit", header:["",""], template:"{common.editIcon()}",width:40},
 				{id:"trash", header:["",""], template:"{common.trashIcon()}",width:40}
 			],
@@ -61,14 +61,14 @@ export default class DataView extends JetView{
 			onClick:{
 				"fa-trash":function(e,id){
 					webix.confirm({
-						text:"Are you sure?",
+						text:_("Are you sure?"),
 						title:"Attention",
 						callback:function(result){
 							if(result){
 								activities.remove(id);
 								activities.waitData.then(
-									() => webix.message("Deleted"),
-									()=> webix.message("Undeleted")
+									() => webix.message(_("Deleted")),
+									()=> webix.message(_("Undeleted"))
 								);
 							}
 						}
@@ -98,24 +98,24 @@ export default class DataView extends JetView{
 			this.$$("activityData").sync(activities);
 
 			this.$$("activityData").registerFilter(this.$$("segmentBar"), 
-			{columnId:"DueDate", compare:function(value, filter, item){
-    		if(filter == "all")  return 1; 
-   			if(filter == "over")  return 0;
-   			if(filter == "complete")  return 0;
-   			if(filter == "today")  return 0;
-   			if(filter == "tommorow")  return 0;
-   			if(filter == "week")  return 0;
-   			if(filter == "month")  return 0;
-  		}},
-  		{ 
-		    getValue:function(node){
-		      return node.getValue();
-		    },
-		    setValue:function(node, value){
-		      node.setValue(value);
-		    }
-		  }
-		);
+				{columnId:"DueDate", compare:function(value, filter){
+					if(filter == "all")  return 1; 
+					if(filter == "over")  return 0;
+					if(filter == "complete")  return 0;
+					if(filter == "today")  return 0;
+					if(filter == "tommorow")  return 0;
+					if(filter == "week")  return 0;
+					if(filter == "month")  return 0;
+				}},
+				{ 
+					getValue:function(node){
+						return node.getValue();
+					},
+					setValue:function(node, value){
+						node.setValue(value);
+					}
+				}
+			);
 		});
 	}
 }

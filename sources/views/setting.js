@@ -18,8 +18,8 @@ export default class DataView extends JetView{
 			inputWidth:250, 
 			name:"lang",
 			options:[
-				{ id:"en", value:"En" },
-				{ id:"ru", value:"Ru"}
+				{ id:"en", value:_("En")},
+				{ id:"ru", value:_("Ru")}
 			],
 			click:() => this.toggleLanguage(),
 			align:"center"
@@ -32,6 +32,7 @@ export default class DataView extends JetView{
 
 		var menu = {cols:[
 			{
+				css:"border", 
 				view:"list", 
 				id:"selector",
 				select:true,

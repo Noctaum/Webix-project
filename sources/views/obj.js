@@ -9,9 +9,14 @@ export default class DataTable extends JetView{
 			view:"datatable", 
 			gravity:4, 
 			editable:true,
-			autoConfig:true,
+			//autoConfig:true,
 			editaction:"dblclick",
-			select:true
+			select:true,
+			columns:[
+				{id:"Value", header:_("Value")},
+				{id:"Icon", header:_("Icon")},
+			],
+			minHeight:300,
 		};
 
 		let addBut = { 
@@ -28,7 +33,7 @@ export default class DataTable extends JetView{
 			click:() => this.dell()
 		};
 
-		return {rows:[table, addBut, delBut]};
+		return {rows:[{cols:[table, {rows:[addBut, delBut]}]},{}]};
 	}
 	
 	init(){

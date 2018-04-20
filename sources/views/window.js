@@ -6,26 +6,28 @@ import {activities} from "models/activities";
 export default class WindowEdit extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let form = {
 			view:"form",
 			elements:[{
 				rows:[
-					{view: "textarea", label: "Details", height: 200, name:"Details"},
-					{view:"combo", label:"TypeID", options:{data:typeActivity}, name:"TypeID", invalidMessage:"Title shouldn't be empty!"},
-					{view:"combo", label:"ContactID", options:{data:contacts}, name:"ContactID", invalidMessage:"Title shouldn't be empty!"},
+					{view: "textarea", label:_("Details"), height: 200, name:"Details"},
+					{view:"combo", label:_("TypeID"), options:{data:typeActivity}, name:"TypeID", invalidMessage:_("Title shouldn't be empty!")},
+					{view:"combo", label:_("ContactID"), options:{data:contacts}, name:"ContactID", invalidMessage:_("Title shouldn't be empty!")},
 					{
 						cols:[
-							{view:"datepicker", label:"Date", name:"DueDate"},
-							{view:"datepicker", label:"Time", type:"time", name:"Time"},
+							{view:"datepicker", label:_("Date"), name:"DueDate"},
+							{view:"datepicker", label:_("Time"), type:"time", name:"Time"},
 						]
 					},
-					{view:"checkbox", label:"Completed", name:"State", uncheckValue:"Open", checkValue:"Close", labelWidth:92},
+					{view:"checkbox", label:_("Completed"), name:"State", uncheckValue:"Open", checkValue:"Close", labelWidth:92},
 					{
 						cols:[
 							{},
 							{
 								view:"button",
-								label: "",
+								label:"",
 								type:"form",
 								click: () => { 
 									let popForm = this.getRoot().queryView({view:"form"});
@@ -42,7 +44,7 @@ export default class WindowEdit extends JetView{
 							},
 							{
 								view:"button", 
-								label:"Cancel", 
+								label:_("Cancel"), 
 								click:() => {
 									this.hideFunction();
 								}
