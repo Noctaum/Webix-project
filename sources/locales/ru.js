@@ -1,6 +1,7 @@
 export default {
 	//A
 	"Activities":"Задачи",
+	"activities":"задачи",
 	"Activity":"Задачи",
 	"Activity type":"Тип задачи",
 	"Add":"Добавить",
@@ -69,6 +70,7 @@ export default {
 	"Tomorrow":"Завтра",
 	"Time":"Время",
 	"TypeID":"Вид задачи",
+	"type to find matching contacts":"данные для поиска",
 	"This week":"На этой неделе",
 	"This month":"В этом месяце",
 	"Title shouldn't be empty!":"Это поле должно быть заполнено!",

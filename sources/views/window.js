@@ -62,7 +62,7 @@ export default class WindowEdit extends JetView{
 		let pop = {
 			view:"window",
 			position:"center",
-			head:(obj)=>`${obj} activities`, 
+			head:(obj)=>`${obj} ${_("activities")}`, 
 			width: 700,
 			body: form
 		};
@@ -70,13 +70,15 @@ export default class WindowEdit extends JetView{
 		return pop;
 	}
 	init(){
+		let _ = this.app.getService("locale")._;
+
 		this.on(this.app, "dataActivityEdit", (data) => {
 			if(data.disabled) this.getRoot().queryView({name:"ContactID"}).disable();
 			this.getRoot().queryView({view:"form"}).setValues(data);
 			let a;
 			data.id ? a = "Edit" : a = "Add";
-			this.getRoot().getHead().setValues(a);
-			this.getRoot().queryView({view:"button", type:"form"}).setValue(a);
+			this.getRoot().getHead().setValues(_(a));
+			this.getRoot().queryView({view:"button", type:"form"}).setValue(_(a));
 		});
 	}
 	showWindow() {

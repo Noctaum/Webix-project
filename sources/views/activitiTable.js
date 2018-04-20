@@ -98,14 +98,19 @@ export default class DataView extends JetView{
 			this.$$("activityData").sync(activities);
 
 			this.$$("activityData").registerFilter(this.$$("segmentBar"), 
-				{columnId:"DueDate", compare:function(value, filter){
-					if(filter == "all")  return 1; 
-					if(filter == "over")  return 0;
-					if(filter == "complete")  return 0;
-					if(filter == "today")  return 0;
-					if(filter == "tommorow")  return 0;
-					if(filter == "week")  return 0;
-					if(filter == "month")  return 0;
+				{columnId:"DueDate", compare:function(value, filter, item){
+					var formatFull = webix.Date.dateToStr("%Y.%n.%j");
+					var formatHalf = webix.Date.dateToStr("%Y.%n");
+					let parserDay = webix.Date.dateToStr("%j");
+					if(filter == "all") return 1; 
+					if(filter == "over") return value < new Date() && item.State == "Open";
+					if(filter == "complete") return item.State == "Open";
+					if(filter == "today") return formatFull(value) == formatFull(new Date());
+					if(filter == "tommorow"){
+						if(formatHalf(value) == formatHalf(new Date()) && (+parserDay(value)) == (+(parserDay(new Date))+1)) return 1;
+					}
+					if(filter == "week") return webix.Date.weekStart(value) == webix.Date.weekStart(new Date());
+					if(filter == "month") return formatHalf(value) == formatHalf(new Date());
 				}},
 				{ 
 					getValue:function(node){

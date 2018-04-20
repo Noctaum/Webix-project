@@ -1,6 +1,7 @@
 export default {
 	//A
 	"Activities":"Activities",
+	"activities":"activities",
 	"Activity":"Activity",
 	"Activity type":"Activity type",
 	"Add":"Add",
@@ -69,6 +70,7 @@ export default {
 	"Tomorrow":"Tomorrow",
 	"Time":"Time",
 	"TypeID":"TypeID",
+	"type to find matching contacts":"type to find matching contacts",
 	"This week":"This week",
 	"This month":"This month",
 	"Title shouldn't be empty!":"Title shouldn't be empty!",

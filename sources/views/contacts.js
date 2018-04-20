@@ -20,9 +20,9 @@ export default class DataView extends JetView{
 				<div class='userImageWrapeSmall'>
 					<img class='userPhoto' src=${data.Photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 				</div>
-				${data.FirstName || "nameless"}
-				${data.LastName || "empty"} <br>
-				${data.Email || "empty"}`;			
+				${data.FirstName || _("nameless")}
+				${data.LastName || _("empty")} <br>
+				${data.Email || _("empty")}`;			
 		};
 
 		let list = { 
@@ -32,7 +32,7 @@ export default class DataView extends JetView{
 						{
 							view:"text", 
 							id:"filterForUser",
-							placeholder:"type to find matching contacts",
+							placeholder:_("type to find matching contacts"),
 							on:{
 								onTimedKeyPress:()=>{
 									let value = this.$$("filterForUser").getValue().toLowerCase();
