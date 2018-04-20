@@ -70,7 +70,6 @@ export default class DataView extends JetView{
 		};
 		return list;
 	}
-
 	init(){
 		this.$$("contactsList").sync(contacts);
 	}
