@@ -49,6 +49,7 @@ export default class DataView extends JetView{
 							}
 						},
 						{
+							css:"border",
 							view:"list",
 							id:"contactsList",
 							select:true,
@@ -59,7 +60,8 @@ export default class DataView extends JetView{
 							},
 							click:(id) =>{
 								this.show(`../contacts?id=${id}/templateUser`);
-							}
+							},
+							gravity:100,
 						},
 						addBut,
 					],
