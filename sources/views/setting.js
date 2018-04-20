@@ -46,8 +46,8 @@ export default class DataView extends JetView{
 					}
 				},
 				data: [
-					{ value:_("Language"),  id:"language",  icon:"book" },
-					{ value:_("Activity"), id:"activity", icon:"globe" },
+					{ value:_("Language"),  id:"language",  icon:"globe" },
+					{ value:_("Activity"), id:"activity", icon:"book" },
 					{ value:_("Statuses"),  id:"statuses",  icon:"book" },	
 				]
 			},    

@@ -8,32 +8,40 @@ export default class DataTable extends JetView{
 		let table = { 
 			view:"datatable", 
 			gravity:4, 
+			width:400,
 			editable:true,
 			//autoConfig:true,
 			editaction:"dblclick",
 			select:true,
 			columns:[
-				{id:"Value", header:_("Value")},
-				{id:"Icon", header:_("Icon")},
+				{view:"text",id:"Value",editor:"text", header:_("Value"), width:200},
+				{view:"text",id:"Icon",editor:"text", header:_("Icon"), width:200},
 			],
 			minHeight:300,
 		};
 
 		let addBut = { 
 			view:"button",
-			gravity:1, 
-			label:_("Add new"), 
+			label:_("Add new"),
+			width:200, 
 			click:() => this.add()
 		};
 
 		let delBut = {
-			gravity:1, 
 			view:"button", 
-			value:_("Delete"), 
+			value:_("Delete"),
+			width:200, 
 			click:() => this.dell()
 		};
 
-		return {rows:[{cols:[table, {rows:[addBut, delBut]}]},{}]};
+		return {
+			rows:[
+				{cols:[
+					table, {rows:[addBut, delBut]},{}
+				]},
+				{}
+			]
+		};
 	}
 	
 	init(){
