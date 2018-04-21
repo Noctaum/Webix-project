@@ -26,7 +26,6 @@ export default class aUserDataView extends JetView{
 							Size:file.size,
 							ContactID:id
 						});
-					return false;
 				}
 			}
 		};

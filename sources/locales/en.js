@@ -50,6 +50,8 @@ export default {
 	"Language":"Language",
 	//N
 	"Name" : "Name",
+	"New Status":"New Status",
+	"New Activity":"New Activity",
 	//O
 	"Overdue":"Overdue",
 	//P

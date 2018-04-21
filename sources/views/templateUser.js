@@ -1,6 +1,8 @@
 import {JetView} from "webix-jet";
 import {contacts} from "models/contacts";
 import {status} from "models/status";
+import {delFile} from "models/files";
+import {delActiv} from "models/activities";
 import aUserTable from "views/individualTable";
 
 export default class templateUser extends JetView{
@@ -31,7 +33,11 @@ export default class templateUser extends JetView{
 					title:"Attention",
 					callback:(result)=>{
 						if(result){
-							if(id) contacts.remove(id);
+							if(id) {
+								contacts.remove(id);
+								delActiv(id);
+								delFile(id);
+							}
 							contacts.waitData.then(
 								() => {
 									webix.message("Deleted");

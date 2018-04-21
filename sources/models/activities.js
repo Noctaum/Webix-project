@@ -4,7 +4,7 @@ export const activities = new webix.DataCollection({
 	save:"rest->http://localhost:8096/api/v1/activities/",
 
 	scheme:{
-		$init:(obj) =>{
+		$change:(obj) =>{
 			let parser = webix.Date.strToDate("%d-%m-%Y");
 			obj.DueDate = parser(obj.DueDate);
 		},
@@ -14,6 +14,14 @@ export const activities = new webix.DataCollection({
 		}
 	}
 });
+
+export let delActiv = (ContactID) => {
+	activities.find(function(data){
+		if (data.ContactID == ContactID){
+			activities.remove(data.id);
+		}
+	});
+};
 /*
 [{"id":1,"Details":"Some","TypeID":2,"State":"Open","ContactID":1,"DueDate":"01-01-0001"},
 {"id":2,"Details":"Some","TypeID":2,"State":"Open","ContactID":1,"DueDate":"16-04-2018"},

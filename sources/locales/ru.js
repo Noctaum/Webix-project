@@ -50,6 +50,8 @@ export default {
 	"Language":"Язык",
 	//N
 	"Name" : "Имя",
+	"New Status":"Новый статус",
+	"New Activity":"Новая задача",
 	//O
 	"Overdue":"Просроченные",
 	//P

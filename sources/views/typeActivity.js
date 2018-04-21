@@ -2,13 +2,15 @@ import data from "views/obj";
 import {typeActivity} from "models/typeActivity";
 
 export default class countryData extends data{
-	ready(view){
+	ready(){
 		typeActivity.waitData.then(() => {
-			view.queryView({ view:"datatable"}).sync(typeActivity);
+			this.table.sync(typeActivity);
 		});
 	}
 	add(){
-		typeActivity.add({Value:"New Activity",Icon:"Icon"});
+		const _ = this.app.getService("locale")._;
+
+		typeActivity.add({Value:_("New Activity"),Icon:_("Icon")});
 	}
 	dell(){
 		var one = this.table.getSelectedId();

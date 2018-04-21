@@ -50,13 +50,12 @@ export default class DataView extends JetView{
 			columns:[
 				{id:"State", header:["",""], sort:"string", template:"{common.checkbox()}", uncheckValue:"Open", checkValue:"Close",width:40},
 				{id:"TypeID", header: [_("Activity type") ,{content:"selectFilter"}], sort:"string", options:typeActivity,fillspace:4},
-				{id:"DueDate", header:[_("Due date"),{ content:"datepickerFilter"}], sort:"date",fillspace:2},
+				{id:"DueDate", format:webix.i18n.dateFormatStr, header:[_("Due date"),{ content:"datepickerFilter"}], sort:"date",fillspace:2},
 				{id:"Details", header:[_("Details"), { content:"textFilter"}], sort:"string",fillspace:2},
 				{id:"ContactID", header:[_("Contact"),{ content:"selectFilter"}], sort:"string", options:contacts, fillspace:2},
 				{id:"edit", header:["",""], template:"{common.editIcon()}",width:40},
 				{id:"trash", header:["",""], template:"{common.trashIcon()}",width:40}
 			],
-			
 			//Delete selected activity
 			onClick:{
 				"fa-trash":function(e,id){
@@ -99,18 +98,22 @@ export default class DataView extends JetView{
 
 			this.$$("activityData").registerFilter(this.$$("segmentBar"), 
 				{columnId:"DueDate", compare:function(value, filter, item){
-					var formatFull = webix.Date.dateToStr("%Y.%n.%j");
-					var formatHalf = webix.Date.dateToStr("%Y.%n");
-					let parserDay = webix.Date.dateToStr("%j");
+					let newDate = new Date();
 					if(filter == "all") return 1; 
-					if(filter == "over") return value < new Date() && item.State == "Open";
+					if(filter == "over") return value < newDate && item.State == "Open";
 					if(filter == "complete") return item.State == "Close";
-					if(filter == "today") return formatFull(value) == formatFull(new Date());
-					if(filter == "tommorow"){
-						if(formatHalf(value) == formatHalf(new Date()) && (+parserDay(value)) == (+(parserDay(new Date))+1)) return 1;
+					if(filter == "today") {
+						return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.dayStart(newDate,true));
 					}
-					if(filter == "week") return webix.Date.weekStart(value) == webix.Date.weekStart(new Date());
-					if(filter == "month") return formatHalf(value) == formatHalf(new Date());
+					if(filter == "tommorow"){
+						return webix.Date.equal(value, webix.Date.add(webix.Date.dayStart(newDate,true),1,"day",true));
+					}
+					if(filter == "week"){
+						return webix.Date.equal(webix.Date.weekStart(value), webix.Date.weekStart(newDate));
+					}
+					if(filter == "month"){
+						return webix.Date.equal(webix.Date.monthStart(value), webix.Date.monthStart(newDate));
+					}
 				}},
 				{ 
 					getValue:function(node){

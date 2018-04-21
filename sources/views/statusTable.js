@@ -2,13 +2,15 @@ import data from "views/obj";
 import {status} from "models/status";
 
 export default class statusData extends data{
-	ready(view){
+	ready(){
 		status.waitData.then(() => {
-			view.queryView({ view:"datatable"}).sync(status);
+			this.table.sync(status);
 		});
 	}
 	add(){
-		status.add({Value:"New Status", Icon:"Icon"});
+		const _ = this.app.getService("locale")._;
+
+		status.add({Value:_("New Status"), Icon:_("Icon")});
 	}
 	dell(){ 
 		var one = this.table.getSelectedId();

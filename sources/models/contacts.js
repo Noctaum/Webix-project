@@ -4,9 +4,9 @@ export const contacts = new webix.DataCollection({
 	save:"rest->http://localhost:8096/api/v1/contacts/",
 
 	scheme: {
-		$init: function (obj) {
+		$change: function (obj) {
 			obj.value = `${obj.FirstName} ${obj.LastName}`;
-		}
+		},
 	}
 });
 /*

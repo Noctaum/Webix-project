@@ -36,14 +36,12 @@ export default class DataView extends JetView{
 							on:{
 								onTimedKeyPress:()=>{
 									let value = this.$$("filterForUser").getValue().toLowerCase();
-									this.$$("contactsList").filter(function(obj){
-
-										//It work bed because the most of time we find all contacts
-										// for(let key in obj){
-										// 	if (obj[key].toLowerCase().indexOf(value) == 0) return true;
-										// }
-
-										if (obj.FirstName.toLowerCase().indexOf(value) == 0 || obj.LastName.toLowerCase().indexOf(value) == 0 || obj.Email.toLowerCase().indexOf(value) == 0) return true;
+									this.$$("contactsList").data.filter(function(obj){
+										for(let key in obj){
+											if(key !== "id" && key !== "Photo" && key !== "StatusID"){
+												if (obj[key].toLowerCase().indexOf(value) == 0) return true;
+											}
+										}
 									});
 								}
 							}
