@@ -1,8 +1,16 @@
+import {delFile} from "models/files";
+import {delActiv} from "models/activities";
+
 export const contacts = new webix.DataCollection({ 
 	
 	url:"http://localhost:8096/api/v1/contacts/",
 	save:"rest->http://localhost:8096/api/v1/contacts/",
-
+	on:{
+		onAfterDelete:(id)=>{
+			delActiv(id);
+			delFile(id);
+		},
+	},
 	scheme: {
 		$change: function (obj) {
 			obj.value = `${obj.FirstName} ${obj.LastName}`;
