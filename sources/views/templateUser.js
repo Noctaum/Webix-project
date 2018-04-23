@@ -36,10 +36,8 @@ export default class templateUser extends JetView{
 							}
 							contacts.waitData.then(
 								() => {
-									webix.message("Deleted");
 									this.app.show("top/contacts");
-								},
-								()=> webix.message("Undeleted")
+								}
 							);
 						}
 					}

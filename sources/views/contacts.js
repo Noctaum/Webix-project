@@ -43,7 +43,8 @@ export default class DataView extends JetView{
 											}
 										}
 									});
-								}
+								},
+								
 							}
 						},
 						{
@@ -57,6 +58,11 @@ export default class DataView extends JetView{
 							},
 							click:(id) =>{
 								this.show(`../contacts?id=${id}/templateUser`);
+							},
+							on:{
+								"data->onIdChange":(oldId, newId) => {
+									this.app.show(`top/contacts?id=${newId}/templateUser`);
+								}
 							},
 						},
 						addBut,

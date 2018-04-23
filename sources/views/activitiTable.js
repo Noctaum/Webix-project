@@ -85,10 +85,6 @@ export default class DataView extends JetView{
 						callback:function(result){
 							if(result){
 								activities.remove(id);
-								activities.waitData.then(
-									() => webix.message(_("Deleted")),
-									()=> webix.message(_("Undeleted"))
-								);
 							}
 						}
 					});
