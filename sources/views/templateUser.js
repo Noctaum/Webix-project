@@ -49,6 +49,7 @@ export default class templateUser extends JetView{
 
 		let templ = (data) =>{
 			let Status = status.getItem(data.StatusID);
+			let format = webix.i18n.dateFormatStr;
 			return `
 				<div>
 					<h2>${data.FirstName || _("empty")} ${data.LastName || _("empty")}</h2>
@@ -70,7 +71,7 @@ export default class templateUser extends JetView{
 					</div>
 					<div class="conteiner">
 						<div class="content">
-						<span class='webix_icon fa-calendar'></span> ${data.Birthday || _("empty")} </div>
+						<span class='webix_icon fa-calendar'></span> ${format(data.Birthday) || _("empty")} </div>
 						<div class="content"><span class='webix_icon fa-map-marker'></span> ${data.Address || _("empty")} </div>
 					</div>
 				</div>`;

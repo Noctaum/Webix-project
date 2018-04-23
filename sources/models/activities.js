@@ -16,7 +16,7 @@ export const activities = new webix.DataCollection({
 });
 
 export let delActiv = (ContactID) => {
-	activities.find(function(data){
+	activities.data.each(function(data){
 		if (data.ContactID == ContactID){
 			activities.remove(data.id);
 		}

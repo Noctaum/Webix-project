@@ -106,7 +106,7 @@ export default class DataView extends JetView{
 						return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.dayStart(newDate,true));
 					}
 					if(filter == "tommorow"){
-						return webix.Date.equal(value, webix.Date.add(webix.Date.dayStart(newDate,true),1,"day",true));
+						return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.add(webix.Date.dayStart(newDate,true),1,"day",true));
 					}
 					if(filter == "week"){
 						return webix.Date.equal(webix.Date.weekStart(value), webix.Date.weekStart(newDate));

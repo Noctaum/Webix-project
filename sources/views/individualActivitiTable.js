@@ -30,7 +30,7 @@ export default class aUserDataView extends JetView{
 			columns:[
 				{id:"State", header:"", sort:"string", template:"{common.checkbox()}", uncheckValue:"Open", checkValue:"Close",width:40},
 				{id:"TypeID", header:{content:"selectFilter"}, sort:"string", options:typeActivity,fillspace:4},
-				{id:"DueDate", header:{content:"datepickerFilter"}, sort:"date",fillspace:2},
+				{id:"DueDate", header:{content:"datepickerFilter"},format:webix.i18n.dateFormatStr, sort:"date",fillspace:2},
 				{id:"Details", header:{content:"textFilter"}, sort:"string",fillspace:2},
 				{id:"edit", header:"", template:"{common.editIcon()}",width:40},
 				{id:"trash", header:"", template:"{common.trashIcon()}",width:40},

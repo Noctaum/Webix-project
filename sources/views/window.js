@@ -73,12 +73,13 @@ export default class WindowEdit extends JetView{
 		let _ = this.app.getService("locale")._;
 
 		this.on(this.app, "dataActivityEdit", (data) => {
-			if(data.disabled) this.getRoot().queryView({name:"ContactID"}).disable();
-			this.getRoot().queryView({view:"form"}).setValues(data);
+			let root = this.getRoot();
+			if(data.disabled) root.queryView({name:"ContactID"}).disable();
+			root.queryView({view:"form"}).setValues(data);
 			let text;
 			data.id ? text = "Edit" : text = "Add";
-			this.getRoot().getHead().setValues(_(text));
-			this.getRoot().queryView({view:"button", type:"form"}).setValue(_(text));
+			root.getHead().setValues(_(text));
+			root.queryView({view:"button", type:"form"}).setValue(_(text));
 		});
 	}
 	showWindow() {

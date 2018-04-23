@@ -12,9 +12,18 @@ export const contacts = new webix.DataCollection({
 		},
 	},
 	scheme: {
-		$change: function (obj) {
+		$change:(obj) =>{
 			obj.value = `${obj.FirstName} ${obj.LastName}`;
+
+			let parser = webix.Date.strToDate("%d-%m-%Y");
+			obj.DueDate = parser(obj.DueDate);
+			obj.Birthday = parser(obj.Birthday);
 		},
+		$save:(obj) =>{
+			let format = webix.Date.dateToStr("%d-%m-%Y");
+			obj.DueDate = format(obj.DueDate);
+			obj.Birthday = format(obj.Birthday);
+		}
 	}
 });
 /*

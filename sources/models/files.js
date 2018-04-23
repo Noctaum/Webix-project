@@ -11,7 +11,7 @@ export const files = new webix.DataCollection({
 });
 
 export let delFile = (ContactID) => {
-	files.find(function(data){
+	files.data.each(function(data){
 		if (data.ContactID == ContactID){
 			files.remove(data.id);
 		}

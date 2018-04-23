@@ -39,7 +39,7 @@ export default class DataView extends JetView{
 									this.$$("contactsList").data.filter(function(obj){
 										for(let key in obj){
 											if(key !== "id" && key !== "Photo" && key !== "StatusID"){
-												if (obj[key].toLowerCase().indexOf(value) == 0) return true;
+												if (obj[key].toLowerCase().indexOf(value) != -1) return true;
 											}
 										}
 									});
@@ -50,7 +50,7 @@ export default class DataView extends JetView{
 							view:"list",
 							id:"contactsList",
 							select:true,
-							gravity:100,
+							width:220,
 							template:templ,
 							type:{
 								height:70          

@@ -7,8 +7,6 @@ export default class DataTable extends JetView{
 		
 		let table = { 
 			view:"datatable", 
-			gravity:4, 
-			width:400,
 			editable:true,
 			//autoConfig:true,
 			editaction:"dblclick",
@@ -22,24 +20,21 @@ export default class DataTable extends JetView{
 
 		let addBut = { 
 			view:"button",
-			label:_("Add new"),
-			width:200, 
+			label:_("Add new"), 
 			click:() => this.add()
 		};
 
 		let delBut = {
 			view:"button", 
 			value:_("Delete"),
-			width:200, 
 			click:() => this.dell()
 		};
 
 		return {
 			rows:[
-				{cols:[
-					table, {rows:[addBut, delBut]},{}
-				]},
-				{}
+				table,
+				delBut,
+				addBut
 			]
 		};
 	}
