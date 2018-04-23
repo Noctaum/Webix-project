@@ -25,6 +25,26 @@ export default class DataView extends JetView{
 			on:{
 				onChange:()=>{
 					this.$$("activityData").filterByAll();
+					this.$$("activityData").filter((data)=>{
+						let value = data.DueDate;
+						let filter = this.$$("segmentBar").getValue();
+						let newDate = new Date();
+						if(filter == "all") return 1; 
+						if(filter == "over") return value < newDate && data.State == "Open";
+						if(filter == "complete") return data.State == "Close";
+						if(filter == "today") {
+							return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.dayStart(newDate,true));
+						}
+						if(filter == "tommorow"){
+							return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.add(webix.Date.dayStart(newDate,true),1,"day",true));
+						}
+						if(filter == "week"){
+							return webix.Date.equal(webix.Date.weekStart(value), webix.Date.weekStart(newDate));
+						}
+						if(filter == "month"){
+							return webix.Date.equal(webix.Date.monthStart(value), webix.Date.monthStart(newDate));
+						}
+					},"",true);
 				}
 			}
 		};
@@ -95,35 +115,6 @@ export default class DataView extends JetView{
 		this._jetPopup = this.ui(WindowEdit);
 		activities.waitData.then(() => {
 			this.$$("activityData").sync(activities);
-
-			this.$$("activityData").registerFilter(this.$$("segmentBar"), 
-				{columnId:"DueDate", compare:function(value, filter, item){
-					let newDate = new Date();
-					if(filter == "all") return 1; 
-					if(filter == "over") return value < newDate && item.State == "Open";
-					if(filter == "complete") return item.State == "Close";
-					if(filter == "today") {
-						return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.dayStart(newDate,true));
-					}
-					if(filter == "tommorow"){
-						return webix.Date.equal(webix.Date.dayStart(value,true), webix.Date.add(webix.Date.dayStart(newDate,true),1,"day",true));
-					}
-					if(filter == "week"){
-						return webix.Date.equal(webix.Date.weekStart(value), webix.Date.weekStart(newDate));
-					}
-					if(filter == "month"){
-						return webix.Date.equal(webix.Date.monthStart(value), webix.Date.monthStart(newDate));
-					}
-				}},
-				{ 
-					getValue:function(node){
-						return node.getValue();
-					},
-					setValue:function(node, value){
-						node.setValue(value);
-					}
-				}
-			);
 		});
 	}
 }
