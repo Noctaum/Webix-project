@@ -8,7 +8,6 @@ export default class ContactForm extends JetView{
 
 		const _ = this.app.getService("locale")._;
 
-
 		let saveBut = {
 			view:"button", 
 			id:"but",
@@ -117,6 +116,8 @@ export default class ContactForm extends JetView{
 		});
 	}
 	urlChange(){
+		let _ = this.app.getService("locale")._;
+
 		webix.promise.all([
 			contacts.waitData,
 			status.waitData
@@ -132,9 +133,9 @@ export default class ContactForm extends JetView{
 				data = {};
 			}
 			this.$$("form").setValues(data);
-			this.$$("but").config.label = str;
+			this.$$("but").config.label = _(str);
 			this.$$("but").refresh();
-			this.$$("headTempl").setValues(templStr);
+			this.$$("headTempl").setValues(_(templStr));
 			
 			this.photo();
 		});

@@ -6,26 +6,28 @@ import {activities} from "models/activities";
 export default class WindowEdit extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let form = {
 			view:"form",
 			elements:[{
 				rows:[
-					{view: "textarea", label: "Details", height: 200, name:"Details"},
-					{view:"combo", label:"TypeID", options:{data:typeActivity}, name:"TypeID", invalidMessage:"Title shouldn't be empty!"},
-					{view:"combo", label:"ContactID", options:{data:contacts}, name:"ContactID", invalidMessage:"Title shouldn't be empty!"},
+					{view: "textarea", label:_("Details"), height: 200, name:"Details"},
+					{view:"combo", label:_("TypeID"), options:{data:typeActivity}, name:"TypeID", invalidMessage:_("Title shouldn't be empty!")},
+					{view:"combo", label:_("ContactID"), options:{data:contacts}, name:"ContactID", invalidMessage:_("Title shouldn't be empty!")},
 					{
 						cols:[
-							{view:"datepicker", label:"Date", name:"DueDate"},
-							{view:"datepicker", label:"Time", type:"time", name:"Time"},
+							{view:"datepicker", label:_("Date"), name:"DueDate"},
+							{view:"datepicker", label:_("Time"), type:"time", name:"Time"},
 						]
 					},
-					{view:"checkbox", label:"Completed", name:"State", uncheckValue:"Open", checkValue:"Close", labelWidth:92},
+					{view:"checkbox", label:_("Completed"), name:"State", uncheckValue:"Open", checkValue:"Close", labelWidth:92},
 					{
 						cols:[
 							{},
 							{
 								view:"button",
-								label: "",
+								label:"",
 								type:"form",
 								click: () => { 
 									let popForm = this.getRoot().queryView({view:"form"});
@@ -42,7 +44,7 @@ export default class WindowEdit extends JetView{
 							},
 							{
 								view:"button", 
-								label:"Cancel", 
+								label:_("Cancel"), 
 								click:() => {
 									this.hideFunction();
 								}
@@ -60,7 +62,7 @@ export default class WindowEdit extends JetView{
 		let pop = {
 			view:"window",
 			position:"center",
-			head:(obj)=>`${obj} activities`, 
+			head:(obj)=>`${obj} ${_("activities")}`, 
 			width: 700,
 			body: form
 		};
@@ -68,13 +70,16 @@ export default class WindowEdit extends JetView{
 		return pop;
 	}
 	init(){
+		let _ = this.app.getService("locale")._;
+
 		this.on(this.app, "dataActivityEdit", (data) => {
-			if(data.disabled) this.getRoot().queryView({name:"ContactID"}).disable();
-			this.getRoot().queryView({view:"form"}).setValues(data);
-			let a;
-			data.id ? a = "Edit" : a = "Add";
-			this.getRoot().getHead().setValues(a);
-			this.getRoot().queryView({view:"button", type:"form"}).setValue(a);
+			let root = this.getRoot();
+			if(data.disabled) root.queryView({name:"ContactID"}).disable();
+			root.queryView({view:"form"}).setValues(data);
+			let text;
+			data.id ? text = "Edit" : text = "Add";
+			root.getHead().setValues(_(text));
+			root.queryView({view:"button", type:"form"}).setValue(_(text));
 		});
 	}
 	showWindow() {

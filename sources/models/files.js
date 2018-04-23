@@ -9,3 +9,11 @@ export const files = new webix.DataCollection({
 		{id:73, Name:"file6.pdf", DateChange:"82.42.21", Size:"7.4Mb", ContactID:"3"}
 	],
 });
+
+export let delFile = (ContactID) => {
+	files.data.each(function(data){
+		if (data.ContactID == ContactID){
+			files.remove(data.id);
+		}
+	});
+};

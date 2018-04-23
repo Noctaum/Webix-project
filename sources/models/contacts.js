@@ -1,11 +1,28 @@
+import {delFile} from "models/files";
+import {delActiv} from "models/activities";
+
 export const contacts = new webix.DataCollection({ 
 	
 	url:"http://localhost:8096/api/v1/contacts/",
 	save:"rest->http://localhost:8096/api/v1/contacts/",
-
+	on:{
+		onAfterDelete:(id)=>{
+			delActiv(id);
+			delFile(id);
+		},
+	},
 	scheme: {
-		$init: function (obj) {
+		$change:(obj) =>{
 			obj.value = `${obj.FirstName} ${obj.LastName}`;
+
+			let parser = webix.Date.strToDate("%d-%m-%Y");
+			obj.DueDate = parser(obj.DueDate);
+			obj.Birthday = parser(obj.Birthday);
+		},
+		$save:(obj) =>{
+			let format = webix.Date.dateToStr("%d-%m-%Y");
+			obj.DueDate = format(obj.DueDate);
+			obj.Birthday = format(obj.Birthday);
 		}
 	}
 });

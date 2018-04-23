@@ -4,7 +4,7 @@ export const typeActivity = new webix.DataCollection({
 	save:"rest->http://localhost:8096/api/v1/activitytypes/",
 
 	scheme:{
-		$init:function (obj) {
+		$change:function (obj) {
 			obj.value = obj.Value;
 		}
 	}

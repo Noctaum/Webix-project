@@ -20,21 +20,38 @@ export default class DataView extends JetView{
 				<div class='userImageWrapeSmall'>
 					<img class='userPhoto' src=${data.Photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 				</div>
-				${data.FirstName || "nameless"}
-				${data.LastName || "empty"} <br>
-				${data.Email || "empty"}`;			
+				${data.FirstName || _("nameless")}
+				${data.LastName || _("empty")} <br>
+				${data.Email || _("empty")}`;			
 		};
 
 		let list = { 
 			rows:[
 				{cols:[
-					{rows:[
+					{css:"border", rows:[
 						{
-
-							css:"border",
+							view:"text", 
+							id:"filterForUser",
+							placeholder:_("type to find matching contacts"),
+							on:{
+								onTimedKeyPress:()=>{
+									let value = this.$$("filterForUser").getValue().toLowerCase();
+									this.$$("contactsList").data.filter(function(obj){
+										for(let key in obj){
+											if(key !== "id" && key !== "Photo" && key !== "StatusID"){
+												if (obj[key].toLowerCase().indexOf(value) != -1) return true;
+											}
+										}
+									});
+								},
+								
+							}
+						},
+						{
 							view:"list",
 							id:"contactsList",
 							select:true,
+							width:220,
 							template:templ,
 							type:{
 								height:70          
@@ -42,18 +59,21 @@ export default class DataView extends JetView{
 							click:(id) =>{
 								this.show(`../contacts?id=${id}/templateUser`);
 							},
-							gravity:100,
+							on:{
+								"data->onIdChange":(oldId, newId) => {
+									this.app.show(`top/contacts?id=${newId}/templateUser`);
+								}
+							},
 						},
 						addBut,
 					],
 					},
-					{$subview:true}
+					{$subview:true,}
 				]}
 			]	
 		};
 		return list;
 	}
-
 	init(){
 		this.$$("contactsList").sync(contacts);
 	}

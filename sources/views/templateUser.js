@@ -31,13 +31,13 @@ export default class templateUser extends JetView{
 					title:"Attention",
 					callback:(result)=>{
 						if(result){
-							if(id) contacts.remove(id);
+							if(id) {
+								contacts.remove(id);
+							}
 							contacts.waitData.then(
 								() => {
-									webix.message("Deleted");
 									this.app.show("top/contacts");
-								},
-								()=> webix.message("Undeleted")
+								}
 							);
 						}
 					}
@@ -47,29 +47,30 @@ export default class templateUser extends JetView{
 
 		let templ = (data) =>{
 			let Status = status.getItem(data.StatusID);
+			let format = webix.i18n.dateFormatStr;
 			return `
 				<div>
-					<h2>${data.FirstName || "empty"} ${data.LastName || "empty"}</h2>
+					<h2>${data.FirstName || _("empty")} ${data.LastName || _("empty")}</h2>
 				</div>
 				<div class="bigCantainer">
 					<div class="conteiner">
 						<div class='userImageWrape'>
 							<img class='userPhoto' src=${data.Photo || "http://milkyway.mie.uc.edu/cgdm/students/Male.png"}>
 						</div>
-						<div class="content">${Status && Status.Value ? Status.Value : "empty"} </div>
+						<div class="content">${Status && Status.Value ? Status.Value : _("empty")} </div>
 					</div>
 					<div class="conteiner">
 						<div class="content">
-							<span class='webix_icon fa-envelope'></span> ${data.Email || "empty"}
+							<span class='webix_icon fa-envelope'></span> ${data.Email || _("empty")}
 						</div>
-						<div class="content"><span class='webix_icon fa-skype'></span> ${data.Skype || "empty"} </div>
-						<div class="content"><span class='webix_icon fa-tag'></span> ${data.Job || "empty"}</div>
-						<div class="content"><span class='webix_icon fa-briefcase'></span> ${data.Company || "empty"} </div>
+						<div class="content"><span class='webix_icon fa-skype'></span> ${data.Skype || _("empty")} </div>
+						<div class="content"><span class='webix_icon fa-tag'></span> ${data.Job || _("empty")}</div>
+						<div class="content"><span class='webix_icon fa-briefcase'></span> ${data.Company || _("empty")} </div>
 					</div>
 					<div class="conteiner">
 						<div class="content">
-						<span class='webix_icon fa-calendar'></span> ${data.Birthday || "empty"} </div>
-						<div class="content"><span class='webix_icon fa-map-marker'></span> ${data.Address || "empty"} </div>
+						<span class='webix_icon fa-calendar'></span> ${format(data.Birthday) || _("empty")} </div>
+						<div class="content"><span class='webix_icon fa-map-marker'></span> ${data.Address || _("empty")} </div>
 					</div>
 				</div>`;
 		};

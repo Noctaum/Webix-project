@@ -4,9 +4,7 @@ export default class TopView extends JetView{
 	config(){
 		const _ = this.app.getService("locale")._;
 
-		
 		let header = {
-
 			type:"header", template:"#value#", id:"headVal"
 		};
 
@@ -41,7 +39,5 @@ export default class TopView extends JetView{
 	}
 	init(){
 		this.use(plugins.Menu, "top:menu");
-
-		
 	}
 }

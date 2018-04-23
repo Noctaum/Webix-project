@@ -26,7 +26,6 @@ export default class aUserDataView extends JetView{
 							Size:file.size,
 							ContactID:id
 						});
-					return false;
 				}
 			}
 		};
@@ -53,11 +52,6 @@ export default class aUserDataView extends JetView{
 						callback:(result)=>{
 							if(result){
 								this.remove(id);
-								//files.remove(id);
-								files.waitData.then(
-									()=> webix.message("Deleted"),
-									()=> webix.message("Undeleted")
-								);
 							}
 						}
 					});

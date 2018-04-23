@@ -14,8 +14,8 @@ export default class aUserDataView extends JetView{
 				value:_("activ"), 
 				multiview: true, 
 				options: [
-					{ value: "Activities", id: "activ"},
-					{ value: "Files", id: "files"},
+					{ value: _("Activities"), id: "activ"},
+					{ value: _("Files"), id: "files"},
 				]
 			},
 			{cells:[aUserActiv,aUserFile]}
